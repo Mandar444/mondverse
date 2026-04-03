@@ -12,7 +12,7 @@ import {
 import AnimatedBot from '@/components/AnimatedBot';
 import { 
   Brain, Mail, Lock, ArrowLeft, User, Stethoscope, 
-  Settings, Eye, EyeOff, ShieldCheck, Sparkles, Heart, Zap, Globe, ArrowRight
+  Settings, Eye, EyeOff, ShieldCheck, Shield, Sparkles, Heart, Zap, Globe, ArrowRight
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
@@ -33,8 +33,46 @@ const Login = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [displayName, setDisplayName] = useState('');
     const [role, setRole] = useState<UserRole>('user');
+    const [generalError, setGeneralError] = useState('');
 
-    // ... (rest of state)
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setGeneralError('');
+
+        try {
+            const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
+            const payload = isLogin 
+                ? { email, password } 
+                : { email, password, display_name: displayName, role };
+
+            const response = await fetch(`http://localhost:5000${endpoint}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                toast.success(isLogin ? "Neural Alignment Successful" : "Sanctuary Path Established");
+                
+                // Redirect based on role
+                if (data.user.role === 'admin') navigate('/admin');
+                else if (data.user.role === 'psychiatrist') navigate('/psychiatrist');
+                else navigate('/dashboard');
+            } else {
+                setGeneralError(data.message || "Alignment Failed");
+            }
+        } catch (error) {
+            console.error("Auth error:", error);
+            setGeneralError("Neural network timeout. Please verify connections.");
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <div className="min-h-screen relative flex items-center justify-center p-6 overflow-hidden bg-[#f8fafc]">
