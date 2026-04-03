@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 180 40% 98%;
+  --foreground: 220 40% 10%;
+  --primary: 172 66% 50%;
+  --radius: 2rem;
+  --shadow-harmonic: 0 20px 50px -12px rgba(172, 66, 50, 0.12);
+  --shadow-iris: 0 0 40px rgba(255, 255, 255, 0.5), 0 0 80px rgba(172, 66, 50, 0.05);
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+/* Base Utility Classes for Aura Harmonic */
+.harmonic-glass {
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 3rem;
+  box-shadow: 0 20px 50px -12px rgba(172, 66, 50, 0.12);
+}
+
+.harmonic-glass-hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 3rem;
+  box-shadow: 0 20px 50px -12px rgba(172, 66, 50, 0.12);
+  transition: all 0.6s ease;
+}
+
+.harmonic-glass-hover:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+  transform: scale(1.01);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.5), 0 0 80px rgba(172, 66, 50, 0.05);
+}
+
+.btn-aura {
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, #2dd4bf 0%, #6366f1 100%);
+  border: none;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.btn-aura-outline {
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  color: #334155;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  border: 1px solid white;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.input-resonance {
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 1.5rem;
+  padding: 1rem 1.5rem;
+  outline: none;
+  transition: all 0.5s ease;
+}
+
+.text-aura-gradient {
+  background: linear-gradient(135deg, #0f172a 0%, #134e4a 50%, #312e81 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.aura-orb {
+  position: absolute;
+  filter: blur(140px);
+  pointer-events: none;
+  border-radius: 9999px;
+  mix-blend-mode: soft-light;
+  opacity: 0.3;
+  animation: liquidAura 20s ease-in-out infinite alternate, driftAura 30s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes liquidAura {
+  0% { transform: scale(1) translate(0, 0) rotate(0deg); filter: hue-rotate(0deg) blur(140px); }
+  33% { transform: scale(1.1) translate(5%, 5%) rotate(10deg); filter: hue-rotate(20deg) blur(160px); }
+  66% { transform: scale(0.9) translate(-5%, 8%) rotate(-10deg); filter: hue-rotate(-20deg) blur(120px); }
+  100% { transform: scale(1) translate(0, 0) rotate(0deg); filter: hue-rotate(0deg) blur(140px); }
+}
+
+@keyframes driftAura {
+  0% { transform: translate(-30px, -30px); }
+  50% { transform: translate(60px, 60px); }
+  100% { transform: translate(-30px, -30px); }
+}
+
+.animate-breathe {
+  animation: breathe 8s ease-in-out infinite;
+}
+
+.animate-float-harmonic {
+  animation: floatHarmonic 12s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+@keyframes floatHarmonic {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
